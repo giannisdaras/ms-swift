@@ -39,6 +39,10 @@ class TrainArgumentsMixin:
         enable_dft_loss (bool): Whether to enable Diversity-from-Diversity (DFD) loss.
             See https://arxiv.org/abs/2508.05629. Defaults to False.
         enable_channel_loss (bool): Whether to enable channel loss. Defaults to False.
+        ambient_clean_probability (float): With `loss_type ambient_sft`, the probability that a micro-batch uses the
+            standard cross-entropy loss. See https://huggingface.co/papers/2611.23229. Defaults to 0.75.
+        ambient_temperature (float): With `loss_type ambient_sft`, the temperature at which the model matches the
+            initial model. Defaults to 2.5.
         weight_decay (float): The weight decay to apply (if not zero) to all layers except bias and LayerNorm weights.
             Defaults to 0.1.
         adam_beta2 (float): The beta2 hyperparameter for the AdamW optimizer. Defaults to 0.95.
@@ -140,6 +144,8 @@ class TrainArgumentsMixin:
     router_aux_loss_coef: float = 0.
     enable_dft_loss: bool = False  # https://arxiv.org/abs/2508.05629
     enable_channel_loss: bool = False
+    ambient_clean_probability: float = 0.75  # https://huggingface.co/papers/2611.23229
+    ambient_temperature: float = 2.5
     safe_serialization: bool = True
     max_shard_size: str = '5GB'
 

@@ -1,4 +1,5 @@
 # Copyright (c) ModelScope Contributors. All rights reserved.
+from .ambient_sft import AmbientSFTLoss
 from .causal_lm import CustomCrossEntropyLoss
 from .decision import CERPSLoss, DistillRPSLoss, ScoringLoss, SmoothBrierLoss
 from .embedding import ContrastiveLoss, CosineSimilarityLoss, InfonceLoss, OnlineContrastiveLoss
@@ -6,6 +7,7 @@ from .reranker import ListwiseRerankerLoss, PointwiseRerankerLoss
 
 loss_map = {
     'cross_entropy': CustomCrossEntropyLoss,  # examples
+    'ambient_sft': AmbientSFTLoss,  # https://huggingface.co/papers/2611.23229
     # embedding
     'cosine_similarity': CosineSimilarityLoss,
     'contrastive': ContrastiveLoss,

@@ -272,6 +272,8 @@ This list inherits from the Transformers `Seq2SeqTrainingArguments`, with ms-swi
 - router_aux_loss_coef: Used in MoE model training to set the weight of auxiliary loss. Default is `0.`.
 - enable_dft_loss: Whether to use [DFT](https://arxiv.org/abs/2508.05629) (Dynamic Fine-Tuning) loss during SFT training. Default is `False`.
 - enable_channel_loss: Enable channel-based loss. Default is `False`. Requires a `"channel"` field in the dataset. ms-swift groups and computes loss by this field (samples without `"channel"` are grouped into the default `None` channel). Dataset format reference: [channel loss](../Customization/Custom-dataset.md#channel-loss).  Channel loss is compatible with packing, padding_free, and loss_scale techniques.
+- ambient_clean_probability: With `--loss_type ambient_sft` ([Ambient SFT](https://huggingface.co/papers/2611.23229)), the probability that a training micro-batch uses the standard cross-entropy loss; the other micro-batches match the frozen initial model (with LoRA: the model with its adapters disabled) at temperature `ambient_temperature`, scaled by the ratio of its entropy at that temperature to its entropy at temperature 1. Default is `0.75`.
+- ambient_temperature: The temperature of Ambient SFT's matching loss. Default is `2.5`.
 - safe_serialization: Whether to save the model in safetensors format. Default is True.
 - max_shard_size: Maximum size of a single storage file, default is '5GB'.
 - logging_dir: Directory for TensorBoard logs. Default is `None`, automatically set to `f'{self.output_dir}/runs'`.

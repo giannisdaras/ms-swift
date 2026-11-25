@@ -267,6 +267,8 @@ ENV:
 - router_aux_loss_coef: 用于moe模型训练时，设置 aux_loss 的权重，默认为`0.`。
 - enable_dft_loss: 是否在SFT训练中使用[DFT](https://arxiv.org/abs/2508.05629) (Dynamic Fine-Tuning) loss，默认为False。
 - enable_channel_loss: 启用channel loss，默认为`False`。你需要在数据集中准备"channel"字段，ms-swift会根据该字段分组统计loss（若未准备"channel"字段，则归为默认`None` channel）。数据集格式参考[channel loss](../Customization/Custom-dataset.md#channel-loss)。channel loss兼容packing/padding_free/loss_scale等技术。
+- ambient_clean_probability: 配合`--loss_type ambient_sft`使用（[Ambient SFT](https://huggingface.co/papers/2611.23229)），训练时每个micro-batch使用标准交叉熵loss的概率；其余micro-batch在温度`ambient_temperature`下拟合冻结的初始模型（LoRA时为关闭adapter的模型），并乘以初始模型在该温度与温度1下的熵之比。默认为`0.75`。
+- ambient_temperature: Ambient SFT拟合loss的温度。默认为`2.5`。
 - safe_serialization: 是否存储为safetensors，默认为True。
 - max_shard_size: 单存储文件最大大小，默认'5GB'。
 - logging_dir: tensorboard日志保存路径。默认为None，即设置为`f'{self.output_dir}/runs'`。
